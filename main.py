@@ -13,5 +13,5 @@ def t_printer(dt_obj):
 
 
 if __name__ == "__main__":
-    to = date_fnc(1)
+    to = date_fnc(2)
     t_printer(to)

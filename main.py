@@ -10,6 +10,10 @@ import json
 import csv
 
 def date_fnc(hours_shift):
+    '''
+    Date function return date object shifted about
+    hours_shift param
+    '''
     now_t = datetime.now()
     delta_h = timedelta(hours=hours_shift)
     new_time = now_t + delta_h

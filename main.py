@@ -21,6 +21,10 @@ def t_printer(dt_obj):
 
 
 class GithubRepo():
+    '''
+    Class representing Github repository and wrappers
+    on basic Github API.
+    '''
     api_repo_url = "https://api.github.com/repos/"
 
     def __init__(self, owner, repo):

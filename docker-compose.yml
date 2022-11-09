@@ -1,0 +1,15 @@
+services:
+  api_issues:
+    build: .
+    secrets:
+      - token
+    command: ./init.sh python main.py
+    volumes:
+     - github_issues:/usr/src/github_app/outputs
+
+secrets:
+  token:
+    file: ./access_token.priv
+
+volumes:
+  github_issues: {}

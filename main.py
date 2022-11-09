@@ -2,7 +2,8 @@ from base64 import encode
 from datetime import datetime
 from datetime import timedelta
 from os import path
-
+from os import makedirs
+from os import getenv
 
 import urllib.request
 import urllib.parse
@@ -40,8 +41,12 @@ class GithubRepo():
 
     def get_access_token(self):
         token = ""
-        with open("access_token.priv",'r') as f:
-            token = f.read().strip()
+        if getenv("GITHUB_TOKEN") == "":
+            with open("access_token.priv",'r') as f:
+                token = f.read().strip()
+        else:
+            token = getenv("GITHUB_TOKEN").strip()
+        
         return token
 
     def __str__(self):
@@ -92,6 +97,7 @@ class GithubRepo():
 
 def make_path(filename):
     out_dir="outputs"
+    makedirs(out_dir,exist_ok=True)
     return path.join(out_dir,filename)
 
 

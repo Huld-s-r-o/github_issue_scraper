@@ -1,6 +1,7 @@
 services:
   api_issues:
-    build: .
+    #build: .
+    image: theruler/github_api_issues:v0.1.0b
     secrets:
       - token
     command: ./init.sh python main.py

@@ -43,5 +43,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-arg: VERSION_APP=${{ env.tag_version }}
+          build-args: VERSION_APP=${{ env.tag_version }},TAG_APP=$GITHUB_REF
 

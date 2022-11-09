@@ -1,7 +1,9 @@
 FROM python:3
 
 ARG VERSION_APP
+ARG TAG_APP
 ENV VERSION=$VERSION_APP
+ENV TAG=$TAG_APP
 WORKDIR /usr/src/github_app
 
 COPY requirements.txt ./

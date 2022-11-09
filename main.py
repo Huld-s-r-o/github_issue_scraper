@@ -41,7 +41,7 @@ class GithubRepo():
 
     def get_access_token(self):
         token = ""
-        if getenv("GITHUB_TOKEN") == "":
+        if getenv("GITHUB_TOKEN") is None:
             with open("access_token.priv",'r') as f:
                 token = f.read().strip()
         else:

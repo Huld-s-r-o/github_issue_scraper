@@ -1,17 +1,29 @@
 name: Publish Docker image
 
+# on:
+#   release:
+#     types: [published]
+
 on:
-  release:
-    types: [published]
+  create:
+    tags:
+      - '*'
+
 
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
+      - name: Get tag 
+        run: echo "tag_version=$(echo $GITHUB_REF | cut -d/ -f3)" >> GITHUB_ENV
+
+      - name: Put version into file 
+        run: echo ${{ env.tag_version }} >> version.txt
+
       - name: Check out the repo
         uses: actions/checkout@v3
-      
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -23,6 +35,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: theruler/github_api_issues
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
@@ -30,4 +43,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-arg: VERSION_APP=${{ env.tag_version }}
 

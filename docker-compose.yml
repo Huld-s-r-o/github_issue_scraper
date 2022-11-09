@@ -1,10 +1,10 @@
 services:
   api_issues:
     #build: .
-    image: theruler/github_api_issues:v0.1.0b
+    image: theruler/github_api_issues:latest
     secrets:
       - token
-    command: ./init.sh python main.py
+    command: ["sh", "-c", "chmod +x ./init.sh && ./init.sh python main.py"]
     volumes:
      - github_issues:/usr/src/github_app/outputs
 

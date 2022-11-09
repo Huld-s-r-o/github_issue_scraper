@@ -16,10 +16,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get tag 
-        run: echo "tag_version=$(echo $GITHUB_REF | cut -d/ -f3)" >> GITHUB_ENV
+        id: step_tag1
+        run: echo "tag_version=$(echo $GITHUB_REF | cut -d/ -f3)" >> $GITHUB_ENV
 
       - name: Put version into file 
+        id: step_tag2
         run: echo ${{ env.tag_version }} >> version.txt
+
+      - name: Show tag
+        id: step_tag3
+        run: echo ${{ env.tag_version }}
+
+      - name: Show tag
+        id: step_tag4
+        run: echo ${{ github.ref }}
+      
+      - name: Show tag
+        id: step_tag5
+        run: echo $GITHUB_REF
 
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -45,4 +59,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: | 
               VERSION_APP=${{ env.tag_version }}
-              TAG_APP=$GITHUB_REF
+              TAG_APP=${{ github.ref }}

@@ -1,7 +1,7 @@
 from base64 import encode
 from datetime import datetime
 from datetime import timedelta
-
+from os import path
 
 
 import urllib.request
@@ -90,9 +90,14 @@ class GithubRepo():
         
         return transformed
 
+def make_path(filename):
+    out_dir="outputs"
+    return path.join(out_dir,filename)
+
 
 def save_csv(filename, data_dict):
-    with open(filename,'w',encoding='utf-8', newline='') as f:
+    
+    with open(make_path(filename),'w',encoding='utf-8', newline='') as f:
         wo = csv.writer(f, quoting=csv.QUOTE_ALL)
         count = 0
         for item in data_dict:
@@ -105,7 +110,7 @@ def save_csv(filename, data_dict):
 
 
 def save_json(filename, data_dict):
-    with open(filename,'w',encoding='utf-8') as f:
+    with open(make_path(filename),'w',encoding='utf-8') as f:
         json.dump(data_dict, f)
     print(f"Saved {len(data_dict)} issues into: {filename}")
 
@@ -132,6 +137,7 @@ if __name__ == "__main__":
     repo_amcr = GithubRepo("ARUP-CAS","aiscr-webamcr")
     data = repo_amcr.get_transformed_issues(transformation_v1)
     print(f"Received {len(data)} issues")
+    
     save_csv(f"data_{date_frmt}.csv",data)
     save_json(f"data_{date_frmt}.json",data)
     save_json(f"issues-full_{date_frmt}.json",repo_amcr.get_issues_only())

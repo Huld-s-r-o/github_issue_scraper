@@ -5,6 +5,8 @@ This is a simple GitHub API scraper of GitHub issues that saves all available is
 The address of GitHub repository is provided as a command-line argument.
 
 """
+__version__ = "0.1.0"
+
 from base64 import encode
 from datetime import datetime
 from datetime import timedelta
@@ -18,7 +20,6 @@ import urllib.parse
 import json
 import csv
 import sys
-
 
 
 

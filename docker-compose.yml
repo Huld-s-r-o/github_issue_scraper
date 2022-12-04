@@ -4,7 +4,9 @@ services:
     image: theruler/github_api_issues:latest
     secrets:
       - token
-    command: ["sh", "-c", "chmod +x ./init.sh && ./init.sh python main.py"]
+    environment: 
+     - GITHUB_ADDRESS=${GITHUB_ADDRESS}
+    entrypoint: ["sh", "-c", "chmod +x ./init.sh && ./init.sh python main.py ${GITHUB_ADDRESS}"]
     volumes:
      - github_issues:/usr/src/github_app/outputs
 

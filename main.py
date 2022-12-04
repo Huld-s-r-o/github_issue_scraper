@@ -1,3 +1,10 @@
+"""
+Main - GitHub issues scraper.
+
+This is a simple GitHub API scraper of GitHub issues that saves all available issues in the given repository to .csv and .json files.
+The address of GitHub repository is provided as a command-line argument.
+
+"""
 from base64 import encode
 from datetime import datetime
 from datetime import timedelta
@@ -12,11 +19,14 @@ import json
 import csv
 import sys
 
+
+
+
 def date_fnc(hours_shift):
-    """Date function returning date object shifted about hours_shift arg
+    """Date function returning date object shifted about hours_shift arg.
 
     Args:
-        hours_shift (int): number of hours for shifting now date
+        hours_shift (int): number of hours for shifting now date.
 
     Returns:
         date: shifted date object
@@ -37,7 +47,7 @@ def t_printer(dt_obj):
 
 
 class GithubRepo():
-    """Class representing Github repo with set of wrappers for GitHub API
+    """Class representing Github repo with set of wrappers for GitHub API.
 
     Returns:
         _type_: GithubRepo instance
@@ -46,7 +56,7 @@ class GithubRepo():
     api_repo_url = "https://api.github.com/repos/"
 
     def __init__(self, owner, repo):
-        """Instantiate Github repository class with owner and repo name
+        """Instantiate Github repository class with owner and repo name.
 
         Args:
             owner (_type_): owner of repository
@@ -56,10 +66,15 @@ class GithubRepo():
         self.repo_name = repo
 
     def get_repo_url(self):
+        """Getter for GitHub API URL for the given repository.
+
+        Returns:
+            string: formatted URL for GitHub API of the given repository.
+        """
         return f"{self.api_repo_url}{self.owner}/{self.repo_name}"
 
     def get_access_token(self):
-        """Returns access token from ENV variable GITHUB_TOKEN or from pre-defined file "access_token.priv"
+        """Returns access token from ENV variable GITHUB_TOKEN or from pre-defined file "access_token.priv".
 
         Returns:
             _type_: _description_
@@ -82,7 +97,7 @@ class GithubRepo():
         return f"Github repository of OWNER: {self.owner}, REPO_NAME:{self.repo_name}"
 
     def download_issues_all(self):
-        """Downloads all issues from Github and store them as list of dictionaries
+        """Downloads all issues from Github and store them as list of dictionaries.
         """
         last_page = 1
         url_query = [('per_page',50)]
@@ -120,7 +135,7 @@ class GithubRepo():
         self.issues_all = resp_data
 
     def get_issues_only(self):
-        """Getter for issues from given Github repository ommitting pull requests (treated by Github also as an issue)
+        """Getter for issues from given Github repository ommitting pull requests (treated by Github also as an issue).
 
         Returns:
             list: list issues of in the repository
@@ -159,7 +174,7 @@ def make_path(filename):
 
 
 def save_csv(filename, data_dict):
-    """Save data into given file formatted as csv
+    """Save data into given file formatted as csv.
 
     Args:
         filename (_type_): filename of output
@@ -178,7 +193,7 @@ def save_csv(filename, data_dict):
 
 
 def save_json(filename, data_dict):
-    """Save data into given file formatted as json
+    """Save data into given file formatted as json.
 
     Args:
         filename (_type_): filename of output

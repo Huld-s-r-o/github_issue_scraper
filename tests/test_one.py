@@ -1,9 +1,11 @@
-import main
+
+
 import urllib.request
 import urllib.parse
+import sys
+sys.path.append('src')
 
-
-
+import main
 # custom class to be the mock return value
 # will override the requests.Response returned from requests.get
 class MockResponse:

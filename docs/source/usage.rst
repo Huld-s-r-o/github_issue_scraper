@@ -10,5 +10,5 @@ To use Github issues scraper via docker-compose:
 
 .. code-block:: console
 
-   $ GITHUB_ADDRESS="https://github.com/<repo_owner>/<repo_name> docker-compose up
+   $ GITHUB_ADDRESS="https://github.com/<repo_owner>/<repo_name>" docker-compose -f docker/docker-compose.yml up
 

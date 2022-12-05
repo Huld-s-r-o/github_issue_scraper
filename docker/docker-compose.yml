@@ -1,6 +1,8 @@
 services:
   api_issues:
-    #build: .
+    #build: 
+      #context: ../
+      #dockerfile: docker/Dockerfile
     image: theruler/github_api_issues:latest
     secrets:
       - token
@@ -12,7 +14,7 @@ services:
 
 secrets:
   token:
-    file: ./access_token.priv
+    file: ../access_token.priv
 
 volumes:
   github_issues: {}

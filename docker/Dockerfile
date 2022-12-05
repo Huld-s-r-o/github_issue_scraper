@@ -9,6 +9,7 @@ WORKDIR /usr/src/github_app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY src/main.py .
+COPY scripts/init.sh .
 RUN chmod +x ./init.sh
 CMD python ./main.py && cat outputs/*.csv
